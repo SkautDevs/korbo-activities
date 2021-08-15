@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background: white;
+            max-width: 42rem;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+        }
+
+        .boxWrap {
+            margin: 0.2rem 0.4rem;
+            flex-grow: 1;
+        }
+
+        .box {
+            border: black 1px solid;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+            min-height: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <img src="assets/KORBO_logo_120.png" alt="logo KORBO">
+    <div style="width:480px">
+        <iframe allow="fullscreen" frameBorder="0" height="120" src="https://giphy.com/embed/r31CDVGv8RRRbZPU6r/video"
+                width="480"></iframe>
+    </div>
+</div>
+{# <div class="boxWrap">ID
+    <div class="box">{{ a.id }}</div>
+</div> #}
+<div class="boxWrap">Název aktivity
+    <div class="box">{{ a.name }}</div>
+</div>
+<div class="boxWrap">Popis
+    <div class="box">{{ a.description }}</div>
+</div>
+<div class="row">
+    <div class="boxWrap">Typ aktivity
+        <div class="box">{{ a.type }}</div>
+    </div>
+    <div class="boxWrap">Místo
+        <div class="box">{{ a.place }}</div>
+    </div>
+    <div class="boxWrap">Připravuje
+        <div class="box">{{ a.organizator }}</div>
+    </div>
+</div>
+<div class="boxWrap">Čas
+    <div class="box">{{ a.startTime }} - {{ a.endTime }}</div>
+</div>
+<div class="boxWrap">Meeting point:
+    <div class="box"></div>
+</div>
+<div class="boxWrap">Max. počet lidí:
+    <div class="box">{{ a.maxAttendees }}</div>
+</div>
+<div class="boxWrap">Účastníci:
+    <div class="box"></div>
+</div>
+</body>
+</html>
