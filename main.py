@@ -13,7 +13,7 @@ def getSignupsFilename(dir_path):
     return glob.glob(dir_path + "/tables/signups-*.csv")[0]
 
 
-def mapRowToActivity(row):
+def mapRowToActivity(row, signups):
     return Activity(
         row[0],
         row[1],
@@ -27,7 +27,8 @@ def mapRowToActivity(row):
         row[5],
         None,
         None,
-        row[15]
+        row[15],
+        signups.get(row[0], []),
     )
 
 
@@ -45,19 +46,23 @@ def generateHtml(activity):
 def main():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     
+    signupsCsv = getSignupsFilename(dir_path)
+    signups = {}
+    with open(signupsCsv) as csv_signups_file:
+        next(csv_signups_file)
+        csv_reader = csv.reader(csv_signups_file, delimiter=',')
+        for row in csv_reader:
+            signup = signups.get(row[0], [])
+            signup.append(row[3])
+            signups[row[0]] = signup
+    
     eventCsv = getEventFilename(dir_path)
     activities = []
-    
-    with open(eventCsv) as csv_file:
-        
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        headerFlag = True
+    with open(eventCsv) as csv_events_file:
+        next(csv_events_file)
+        csv_reader = csv.reader(csv_events_file, delimiter=',')
         for row in csv_reader:
-            if headerFlag == True:
-                headerFlag = False
-                continue
-            
-            activities.append(mapRowToActivity(row))
+            activities.append(mapRowToActivity(row, signups))
     
     for activity in activities:
         html = generateHtml(activity)

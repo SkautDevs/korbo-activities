@@ -1,0 +1,4 @@
+.idea/
+pdfOutput/*
+htmlOutput/generated.html
+tables/*

@@ -4,17 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        @font-face {
+            font-family: "themix";
+            src: url("assets/TheMix_LT_400.woff") format('woff');
+        }
+        @font-face {
+            font-family: "themix";
+            src: url("assets/TheMix_LT_700.woff") format('woff');
+            font-weight: bold;
+        }
+
         body {
             background: white;
             max-width: 42rem;
             font-size: 14px;
+            font-family: themix, serif;
             display: flex;
             flex-direction: column;
+            background-image: url("assets/frame.png");
+            background-repeat: no-repeat;
         }
 
         .row {
             display: flex;
             width: 100%;
+            justify-content: center;
         }
 
         .boxWrap {
@@ -24,30 +38,41 @@
 
         .box {
             border: black 1px solid;
+            font-size: 16px;
+            text-align: center;
+            height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .boxImportant {
             font-size: 24px;
             font-weight: bold;
-            text-align: center;
-            padding: 1rem;
-            min-height: 1rem;
+            height: 4rem;
+        }
+
+        .boxSemitall {
+            height: 12rem
+        }
+
+        .boxTall {
+            height: 18rem
         }
     </style>
 </head>
 <body>
 <div class="row">
     <img src="assets/KORBO_logo_120.png" alt="logo KORBO">
-    <div style="width:480px">
-        <iframe allow="fullscreen" frameBorder="0" height="120" src="https://giphy.com/embed/r31CDVGv8RRRbZPU6r/video"
-                width="480"></iframe>
-    </div>
 </div>
 {# <div class="boxWrap">ID
     <div class="box">{{ a.id }}</div>
 </div> #}
 <div class="boxWrap">Název aktivity
-    <div class="box">{{ a.name }}</div>
+    <div class="box boxImportant">{{ a.name }}</div>
 </div>
 <div class="boxWrap">Popis
-    <div class="box">{{ a.description }}</div>
+    <div class="box boxTall">{{ a.description }}</div>
 </div>
 <div class="row">
     <div class="boxWrap">Typ aktivity
@@ -60,17 +85,21 @@
         <div class="box">{{ a.organizator }}</div>
     </div>
 </div>
-<div class="boxWrap">Čas
-    <div class="box">{{ a.startTime }} - {{ a.endTime }}</div>
+<div class="row">
+    <div class="boxWrap">Čas
+        <div class="box">{{ a.startDay }} {{ a.startTime }} - {{ a.endDay }} {{ a.endTime }}</div>
+    </div>
+    <div class="boxWrap">Meeting point
+        <div class="box"></div>
+    </div>
+    <div class="boxWrap">Max. počet lidí
+        <div class="box">{{ a.maxAttendees }}</div>
+    </div>
 </div>
-<div class="boxWrap">Meeting point:
-    <div class="box"></div>
-</div>
-<div class="boxWrap">Max. počet lidí:
-    <div class="box">{{ a.maxAttendees }}</div>
-</div>
-<div class="boxWrap">Účastníci:
-    <div class="box"></div>
+<div class="boxWrap">Účastníci
+    <div class="box boxSemitall">
+        {{ a.signups|join(',') }}
+    </div>
 </div>
 </body>
 </html>
