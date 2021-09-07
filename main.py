@@ -4,7 +4,7 @@ import os
 import pdfkit
 
 from Activity import Activity
-from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2 import Environment, select_autoescape
 
 def getEventFilename(dir_path):
     return glob.glob(dir_path + "/tables/events-*.csv")[0]
@@ -28,7 +28,7 @@ def mapRowToActivity(row, signups):
         None,
         None,
         row[15],
-        signups.get(row[0], []),
+        signups.get(row[1], []),
     )
 
 
@@ -52,9 +52,9 @@ def main():
         next(csv_signups_file)
         csv_reader = csv.reader(csv_signups_file, delimiter=',')
         for row in csv_reader:
-            signup = signups.get(row[0], [])
+            signup = signups.get(row[1], [])
             signup.append(row[3])
-            signups[row[0]] = signup
+            signups[row[1]] = signup
     
     eventCsv = getEventFilename(dir_path)
     activities = []
@@ -64,16 +64,19 @@ def main():
         for row in csv_reader:
             activities.append(mapRowToActivity(row, signups))
     
+    count = 0
     for activity in activities:
+        count += 1
+        print("Generating " + str(count) +  ". from " + str(len(activities)))
         html = generateHtml(activity)
         htmlFile = open("htmlOutput/generated.html", "w")
         htmlFile.write(html)
         htmlFile.close()
 
-        output_path = dir_path + "/pdfOutput/generated_" + activity.id + ".pdf"
-        pdfkit.from_file(htmlFile.name, output_path, options={'encoding': "UTF-8",'page-size': 'A5',})
-    
-    signupCsv = getSignupsFilename(dir_path)
+        output_path = dir_path + "/pdfOutput/generated_" + activity.type + "_" + activity.id + ".pdf"
+        pdfkit.from_file(htmlFile.name, output_path, options={"encoding": "UTF-8","page-size": "A5",})
+        print("Done " + str(count) +  ". from " + str(len(activities)))
+        print()
 
 
 # Press the green button in the gutter to run the script.
