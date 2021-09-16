@@ -21,18 +21,15 @@
             font-family: themix, serif;
             display: flex;
             flex-direction: column;
-            background-image: url("assets/frame.png");
-            background-repeat: no-repeat;
+            /*background-image: url("assets/frame.png");*/
+            /*background-repeat: no-repeat;*/
         }
 
         .row {
             display: flex;
             width: 100%;
-            justify-content: center;
-        }
-
-        .headerMargin {
-            margin-top: 120px;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .boxWrap {
@@ -43,12 +40,14 @@
 
         .box {
             border: black 1px solid;
+            border-radius: 8px;
             font-size: 16px;
             text-align: center;
             height: 3.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0 0.4rem;
         }
 
         .boxImportant {
@@ -64,22 +63,38 @@
         .boxTall {
             height: 18rem
         }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .decorative-frame {
+            border-top: 4px solid #cdcdd0;
+            border-bottom: 4px solid #cdcdd0;
+            border-left: 4px solid #cdcdd0;
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
+            padding: 0.4rem 1.6rem;
+        }
     </style>
 </head>
 <body>
-<div class="row headerMargin">
+<div class="row">
+    <img src="assets/KORBO_logo_120.png" alt="logo KORBO">
+    <h2 class="decorative-frame">zodpovědnost - svoboda - skauting</h2>
 </div>
 {# <div class="boxWrap">ID
     <div class="box">{{ a.id }}</div>
 </div> #}
-<div class="boxWrap">Název aktivity
+<div class="boxWrap">Název&nbsp;aktivity
     <div class="box boxImportant">{{ a.name }}</div>
 </div>
 <div class="boxWrap">Popis
     <div class="box boxTall">{{ a.description }}</div>
 </div>
 <div class="row">
-    <div class="boxWrap">Typ aktivity
+    <div class="boxWrap">Typ&nbsp;aktivity
         <div class="box">{{ a.type }}</div>
     </div>
     <div class="boxWrap">Místo
@@ -93,16 +108,16 @@
     <div class="boxWrap">Čas
         <div class="box">{{ a.startDay }} {{ a.startTime }} - {{ a.endDay }} {{ a.endTime }}</div>
     </div>
-    <div class="boxWrap">Meeting point
+    <div class="boxWrap">Meeting&nbsp;point
         <div class="box"></div>
     </div>
-    <div class="boxWrap">Max. počet lidí
+    <div class="boxWrap">Max.&nbsp;počet&nbsp;lidí
         <div class="box">{{ a.maxAttendees }}</div>
     </div>
 </div>
-<div class="boxWrap">Přihlášení účastníci: {{ a.signups|count }} + kdo se dopíše dolů
+<div class="boxWrap">Přihlášení&nbsp;účastníci:&nbsp;{{ a.signups|count }} + kdo se dopíše dolů
     <div class="box boxSemitall">
-        {{ a.signups|join(',') }}
+        {{ a.signups|join(', ') }}
     </div>
 </div>
 </body>
