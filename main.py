@@ -17,18 +17,19 @@ def mapRowToActivity(row, signups):
     return Activity(
         row[0],
         row[1],
-        row[15],
         row[16],
+        None,
         row[7],
-        row[14],
+        row[14] + row[17],
         row[2],
         row[3],
         row[4],
         row[5],
         None,
         None,
-        row[15],
+        None,
         signups.get(row[1], []),
+        row[15],
     )
 
 
@@ -73,7 +74,7 @@ def main():
         htmlFile.write(html)
         htmlFile.close()
 
-        output_path = dir_path + "/pdfOutput/generated_" + activity.type + "_" + activity.id + ".pdf"
+        output_path = dir_path + "/pdfOutput/generated_" + activity.id + ".pdf"
         pdfkit.from_file(htmlFile.name, output_path, options={"encoding": "UTF-8","page-size": "A5",})
         print("Done " + str(count) +  ". from " + str(len(activities)))
         print()

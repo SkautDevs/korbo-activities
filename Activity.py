@@ -14,13 +14,14 @@ class Activity():
                  maxAttendees,
                  notes,
                  signups,
+                 location,
                  ):
         dayMap = {
-            "22": 'st',
-            "23": 'čt',
-            "24": 'pá',
-            "25": 'so',
-            "26": 'ne',
+            "14": 'st',
+            "15": 'čt',
+            "16": 'pá',
+            "17": 'so',
+            "18": 'ne',
         }
         
         self.id = id
@@ -37,3 +38,4 @@ class Activity():
         self.maxAttendees = maxAttendees if maxAttendees != None else "neomezeno"
         self.notes = notes
         self.signups = signups
+        self.location = location
